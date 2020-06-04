@@ -1,10 +1,10 @@
 package io.locngo.ppmttool.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Entity
@@ -14,15 +14,15 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Project name is required")
+    @NotEmpty(message = "Project name is required")
     private String projectName;
 
-    @NotBlank(message = "Project Identifier is required")
-    @Size(min = 4, max = 5, message = "Please use u to 5 character")
+    @NotEmpty(message = "Project Identifier is required")
+    @Length(min = 4, max = 5, message = "Please use u to 5 character")
     @Column(updatable = false, unique = true)
     private String projectIdentifier;
 
-    @NotBlank(message = "Description is required")
+    @NotEmpty(message = "Description is required")
     private String description;
 
     @JsonFormat(pattern = "yyyy-mm-dd")
